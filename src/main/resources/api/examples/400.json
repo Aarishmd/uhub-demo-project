@@ -1,0 +1,7 @@
+              {
+                "code": 400,
+                "message": " Bad Request",
+                "description": "the required key Case type not found",
+                "dateTime": "2020-05-29T05:58:02",
+                "transactionId": "44b32520-61ee-47b4-907d-fa15869f3c4d"
+               }

@@ -1,0 +1,145 @@
+#%RAML 1.0
+title: uhub-sapi
+version: v1
+traits:
+  state-query-params: !include  /uhub-sapi-types/state-query-param.raml
+  client-id-header: !include /exchange-modules/client-id-header.raml
+  transaction-header: !include /exchange-modules/transaction-header.raml
+  correlation-id-header: !include /exchange-modules/correlation-id-header.raml
+
+uses:
+  uhub-sapi-types: /uhub-sapi-types/uhub-sapi-types.raml
+  common-data-type: /library/Common-data-type.raml
+
+/cases:
+  post:
+    description: To register the Covid Cases
+    is:
+      - correlation-id-header
+      - client-id-header
+      - transaction-header
+    body:
+      application/json:
+        type: uhub-sapi-types.covid-case-request-type
+        example: !include /examples/covid-case-request.json
+          
+    responses:
+      201:
+        body:
+          application/json:
+            type: uhub-sapi-types.covid-case-response-type
+            example: !include /examples/covid-case-response.json
+      503:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include /examples/503.json 
+      400:
+        body:
+          application/json:
+            type: common-data-type.error-type            
+            example: !include /examples/400.json
+      500:
+        body:
+          application/json:
+            type: common-data-type.error-type            
+            example: !include  /examples/500.json
+  put:
+    description: To Update the Covid cases
+    is:
+      - correlation-id-header
+      - client-id-header
+      - transaction-header
+    body:
+      application/json:
+        example: !include /examples/covid-case-request.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: uhub-sapi-types.covid-case-response-type
+            example: !include /examples/covid-case-response.json 
+      503:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include /examples/503.json
+      400:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include /examples/400.json
+      500:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include  /examples/500.json
+  /{nationalID}:
+    get:
+      description: To register the Covid Cases
+      is:
+        - correlation-id-header
+        - client-id-header
+        - transaction-header
+      responses:
+        200:
+          body:
+            application/json:
+              type: uhub-sapi-types.get-cases-by-national-id-response-type
+              example: !include /examples/get-cases-by-national-id-response.json
+
+        503:
+          body:
+            application/json:
+              type: common-data-type.error-type
+              example: !include /examples/503.json
+        400:
+          body:
+            application/json:
+              type: common-data-type.error-type
+              example: !include /examples/400.json
+        500:
+          body:
+            application/json:
+              type: common-data-type.error-type
+              example: !include /examples/500.json
+               
+/reports:
+  get:
+    description: Get COVID case reports by state wise. 
+    is:
+      - correlation-id-header
+      - client-id-header
+      - transaction-header
+      - state-query-params
+
+    responses:
+      200:
+        body:
+          application/json:
+            type: uhub-sapi-types.get-reports-response-type
+            example: !include /examples/get-reports-response.json 
+
+      503:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include /examples/503.json
+      500:
+        body:
+          application/json:
+            type: common-data-type.error-type
+            example: !include  /examples/500.json
+
+
+
+          
+      
+  
+
+              
+          
+
+
+
+

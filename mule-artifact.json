@@ -1,0 +1,4 @@
+{
+  "minMuleVersion": "4.4.0",
+  "secureproperties": ["enc.key","anypoint_platfrom_client_id","anypoint_platfrom_client_secret"]
+}
